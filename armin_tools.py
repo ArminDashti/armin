@@ -49,3 +49,8 @@ def array_to_image(array_image):
 def path_to_image(path):
     pass
 
+# https://stackoverflow.com/questions/49201236/check-the-total-number-of-parameters-in-a-pytorch-model
+def parameter_count(model):
+    return sum(p.numel() for p in model.parameters())
+
+
