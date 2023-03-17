@@ -6,7 +6,7 @@ from PIL import Image
 import sqlalchemy as db
 
 
-def pytorch_what_device():
+def pytorch_device():
     return torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def pgsql_connection(ip, port, db_name, username, password):
