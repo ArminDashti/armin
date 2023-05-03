@@ -5,13 +5,14 @@ import torch.nn.functional as F
 import sys
 import os
 import torchvision
+from torchvision import transforms as T
 import torchvision.transforms as transforms
 import numpy as np
 import pandas as pd
 from PIL import Image
 device='cuda'
 
-def load_model(model_name='resnet50', device):
+def load_model(device, model_name='resnet50'):
     if model_name == 'resnet50':
         return torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True).to(device)
     if model_name == 'resnet34':
@@ -44,3 +45,11 @@ class DeformableConv2d(nn.Module):
                                           mask=modulator,
                                           stride=self.stride,
                                           )
+
+def load_image(img_path):
+    img = Image.open(img_path).convert("RGB")
+    img_to_tensor = transforms.ToTensor()
+    return img_to_tensor(img)
+
+def tensor_to_img(tensor_img):
+    return T.ToPILImage()(tensor_img[0,:,:].to('cpu'))
