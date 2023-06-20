@@ -35,10 +35,6 @@ def tensor_to_array(tensor_image):
 def array_to_tensor():
     pass
 
-def image_to_tensor(img_path):
-    img = Image.open(img_path).convert("RGB")
-    image_tensor_transform = T.ToTensor()
-    return image_tensor_transform(img)
 
 def tensor_to_image(tensor_image):
     pass

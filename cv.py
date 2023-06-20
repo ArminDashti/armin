@@ -10,6 +10,7 @@ import torchvision.transforms as transforms
 import numpy as np
 import pandas as pd
 from PIL import Image
+import cv2
 device='cuda'
 
 def load_model(device, model_name='resnet50'):
@@ -46,10 +47,22 @@ class DeformableConv2d(nn.Module):
                                           stride=self.stride,
                                           )
 
-def load_image(img_path):
+def load_image(img_path, tensor=True):
     img = Image.open(img_path).convert("RGB")
     img_to_tensor = transforms.ToTensor()
     return img_to_tensor(img)
 
 def tensor_to_img(tensor_img):
     return T.ToPILImage()(tensor_img[0,:,:].to('cpu'))
+
+# https://www.digitalocean.com/community/tutorials/how-to-detect-and-extract-faces-from-an-image-with-opencv-and-python
+def draw_rectangle(img_path, points_list):
+    img = image = cv2.imread(img_path)
+    for points in points_list:
+        x = points[0]
+        y = points[1]
+        w = points[2]
+        h = points[3]
+        cv2.rectangle(img, (x, y), (x+w,y+h), color=(0,255,0), thickness=2)
+    return img
+   
