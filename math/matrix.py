@@ -19,3 +19,38 @@ def rank_decomposition(A=None):
             F[:, i] = np.dot(A.T, C[:, i])
     return C, F
 
+#%%
+def gaussian_elimination(A):
+    m = len(A) # row number
+    n = len(A[0]) # column number
+    for i in range(m): # Loop over rows
+        max_value = abs(A[i][0]) # get abs of first element of first row
+        max_index = 0
+        for j in range(1, n): # Loop over columns + 1
+            if abs(A[i][j]) > max_value:
+                max_value = abs(A[i][j])
+                max_index = j
+
+        if max_index != i:
+            A[i], A[max_index] = A[max_index], A[i]
+
+        # Scale row i so that the pivot element is 1.
+        A[i] = A[i] / A[i][max_index]
+
+        # Eliminate the pivot element from the other rows.
+        for j in range(i + 1, m):
+            if A[j][max_index] != 0:
+                A[j] = A[j] - A[i] * A[j][max_index]
+
+    return len([row for row in A if row[0] != 0])
+
+
+A = [[1, 2, 3],
+     [4, 5, 6]]
+
+rank = gaussian_elimination(A)
+print(rank)
+#%%
+a = np.array([[1,2],[ 4,5], [7,8]])
+b = np.array([-1, 2, -1])
+a * b

@@ -6,9 +6,6 @@ from PIL import Image
 import sqlalchemy as db
 
 
-def pytorch_device():
-    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 def pgsql_connection(ip, port, db_name, username, password):
     engine = db.create_engine(f"postgresql://{username}:{password}@{ip}:{port}/{db_name}")
     return engine.connect()
@@ -35,18 +32,22 @@ def tensor_to_array(tensor_image):
 def array_to_tensor():
     pass
 
-
 def tensor_to_image(tensor_image):
     pass
 
-def array_to_image(array_image):
+def numpy_to_image(array_image):
     pass
 
 def path_to_image(path):
     pass
 
 # https://stackoverflow.com/questions/49201236/check-the-total-number-of-parameters-in-a-pytorch-model
-def parameter_count(model):
-    return sum(p.numel() for p in model.parameters())
+def parameters_number(model):
+    parameters_num = sum(p.numel() for p in model.parameters())
+    return "{:,}".format(parameters_num)
 
+def get_paramters(model):
+    pass
 
+def get_gradient(model):
+    pass
