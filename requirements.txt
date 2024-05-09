@@ -6,6 +6,8 @@ torch
 torchvision
 torchaudio
 tensorflow
+opencv-python
+pillow
 mujoco
 gymnasium
 
