@@ -31,7 +31,7 @@ class HalfCheetah:
     def load_env(self):
         self.env = gym.make('HalfCheetah-v4', render_mode='rgb_array')
         # self.env = gym.wrappers.TimeLimit(self.env, max_episode_steps=None)
-        self.reset_env()
+        self.reset()
 
     
     def reset_env(self):
@@ -39,7 +39,7 @@ class HalfCheetah:
         self.env.reset()
         
         
-    def execute_action(self, action):
+    def step(self, action):
         observation, reward, terminated, truncated, info = self.env.step(action)
         result = {'observation':observation, 'reward':reward, 'terminated':terminated, 'truncated':truncated, 'info':info}
         self.save_shot()
