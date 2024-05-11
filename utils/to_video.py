@@ -8,6 +8,6 @@ def imgs_to_video(imgs_dir, output_dir, video_name, fps=10):
     frame = cv2.imread(os.path.join(imgs_dir, images[0]))
     height, width, layers = frame.shape
     fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-    video = cv2.VideoWriter(output_dir+video_name, fourcc, fps, (width, height))
+    video = cv2.VideoWriter(output_dir+'/'+video_name, fourcc, fps, (width, height))
     for image in images:
         video.write(cv2.imread(os.path.join(imgs_dir, image)))
