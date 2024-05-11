@@ -14,10 +14,10 @@ class game:
         self.max_episode_steps = max_episode_steps
         self.temp_shots_dir = os.path.join(env_dir, 'temp_shots')
         self.videos_dir = os.path.join(env_dir, 'videos')
-        self.load_env()
         self.make_dirs()
         self.shot_idx = 1
         self.eps_idx = 1
+        self.load()
         
         
     def make_dirs(self):
@@ -32,17 +32,18 @@ class game:
             files.remove_files(self.videos_dir)
     
         
-    def load_env(self):
+    def load(self):
         self.env = gym.make(self.game, render_mode=self.render_mode)
         if self.max_episode_steps is not None:
             self.env = gym.wrappers.TimeLimit(self.env, max_episode_steps=self.max_episode_steps)
-        self.reset_env()
-
+        self.reset()
     
-    def reset_env(self):
+    
+    def reset(self):
         self.shot_idx = 1
-        self.env.reset()
-        
+        observation, reward = self.env.reset()
+        result = {'observation':observation, 'reward':reward}
+        return result
         
     def step(self, action):
         observation, reward, terminated, truncated, info = self.env.step(action)
