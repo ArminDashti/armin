@@ -5,7 +5,7 @@ from armin_utils.utils.to_video import imgs_to_video
 from armin_utils.utils import files
 
 
-class games:
+class game:
     def __init__(self, env_dir, render_mode='rgb_array', game='HalfCheetah-v4', max_episode_steps=None, video_format='.mp4'):
         self.game = game
         self.render_mode = render_mode
@@ -57,9 +57,6 @@ class games:
         RGB = self.env.render()
         RGB = Image.fromarray(RGB, 'RGB')
         RGB_save_dir = os.path.join(self.env_dir, 'temp_shots')
-        
-        
-        
         RGB.save(RGB_save_dir+'/'+str(self.shot_idx)+'.jpg')
         self.shot_idx += 1
     
