@@ -3,10 +3,27 @@ import os
 from PIL import Image
 from armin_utils.utils.to_video import imgs_to_video
 from armin_utils.utils import files
+from armin_utils.utils.tensor import tensor_to_numpy, to_tensor
+import torch
 
 
 class game:
-    def __init__(self, env_dir, render_mode='rgb_array', game='HalfCheetah-v4', max_episode_steps=None, video_format='.mp4'):
+    def __init__(self, env_dir, 
+                 to_tensor=['action'], 
+                 render_mode='rgb_array', 
+                 game='HalfCheetah-v4', 
+                 max_episode_steps=None, 
+                 video_format='.mp4',
+                 seed=1234,
+                 device=None,
+                 ):
+        
+        if device is None:
+            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        else:
+            self.device = device
+        
+        self.to_tensor = to_tensor
         self.game = game
         self.render_mode = render_mode
         self.env_dir = env_dir
@@ -37,6 +54,7 @@ class game:
         if self.max_episode_steps is not None:
             self.env = gym.wrappers.TimeLimit(self.env, max_episode_steps=self.max_episode_steps)
         self.reset()
+        self.action_space = self.env.action_space
     
     
     def reset(self):
@@ -46,6 +64,8 @@ class game:
         return result
         
     def step(self, action):
+        if torch.is_tensor(action):
+            action = tensor_to_numpy(action)
         observation, reward, terminated, truncated, info = self.env.step(action)
         result = {'observation':observation, 'reward':reward, 'terminated':terminated, 'truncated':truncated, 'info':info}
         self.save_shot()
