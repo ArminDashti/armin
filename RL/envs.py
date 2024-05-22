@@ -34,7 +34,7 @@ class gym:
         self.make_dirs()
         self.shot_idx = 1
         self.eps_idx = 1
-        self.load()
+        self.make()
         
         
     def make_dirs(self):
@@ -49,7 +49,7 @@ class gym:
             files.remove_files(self.videos_dir)
     
         
-    def load(self):
+    def make(self):
         self.env = gym.make(self.game, render_mode=self.render_mode)
         if self.max_episode_steps is not None:
             self.env = gym.wrappers.TimeLimit(self.env, max_episode_steps=self.max_episode_steps)
@@ -71,7 +71,7 @@ class gym:
         result = {'observation':observation, 'reward':reward, 'terminated':terminated, 'truncated':truncated, 'info':info}
         self.save_shot()
         if (terminated == True) or (truncated == True):
-            self.shots_to_video()
+            self.to_video()
         return result
     
     
