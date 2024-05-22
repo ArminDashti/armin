@@ -83,7 +83,7 @@ class gym:
         self.shot_idx += 1
     
     
-    def shots_to_video(self):
+    def to_video(self):
         imgs_to_video(self.temp_shots_dir, self.videos_dir, 'video_output.avi')
         self.eps_idx += 1
     
