@@ -63,6 +63,7 @@ class game:
         result = {'observation':observation, 'reward':reward}
         return result
         
+    
     def step(self, action):
         if torch.is_tensor(action):
             action = tensor_to_numpy(action)
