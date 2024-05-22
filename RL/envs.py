@@ -7,7 +7,7 @@ from armin_utils.utils.tensor import tensor_to_numpy, to_tensor
 import torch
 
 
-class game:
+class gym:
     def __init__(self, env_dir, 
                  to_tensor=['action'], 
                  render_mode='rgb_array', 
