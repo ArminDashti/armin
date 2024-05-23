@@ -24,6 +24,7 @@ class gym:
             self.device = device
         
         self.to_tensor = to_tensor
+        print(game)
         self.game = game
         self.render_mode = render_mode
         self.env_dir = env_dir
@@ -50,6 +51,7 @@ class gym:
     
         
     def make(self):
+        
         self.env = gym.make(self.game, render_mode=self.render_mode)
         if self.max_episode_steps is not None:
             self.env = gym.wrappers.TimeLimit(self.env, max_episode_steps=self.max_episode_steps)
