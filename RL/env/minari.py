@@ -36,11 +36,3 @@ class make:
                 episodes.append(episode)
                 
         return episodes
-        
-    
-
-d = make()
-dd = d.get_dataset()
-#%%
-
-d.observation_dim
