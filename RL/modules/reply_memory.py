@@ -4,12 +4,13 @@ from collections import namedtuple
 
 
 # https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/replay_memory.py
-class ReplayMemory:
+class reply_memory:
     def __init__(self, capacity, seed):
         random.seed(seed)
         self.capacity = capacity
         self.buffer = []
         self.position = 0
+
 
     def push(self, state, action, reward, next_state, done):
         if len(self.buffer) < self.capacity:
@@ -17,13 +18,16 @@ class ReplayMemory:
         self.buffer[self.position] = (state, action, reward, next_state, done)
         self.position = (self.position + 1) % self.capacity
 
+
     def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
         state, action, reward, next_state, done = map(np.stack, zip(*batch))
         return state, action, reward, next_state, done
 
+
     def __len__(self):
         return len(self.buffer)
+
 
     def save_buffer(self, env_name, suffix="", save_path=None):
         if not os.path.exists('checkpoints/'):
@@ -44,8 +48,7 @@ class ReplayMemory:
 # Taken from https://github.com/pytorch/tutorials/blob/master/intermediate_source/reinforcement_q_learning.py
 Transition = namedtuple('Transition',('state', 'action', 'done', 'next_state', 'reward'))
 
-
-class ReplayMemory_Tuple:
+class reply_memory_tuple:
     def __init__(self, capacity, saving_tensor=True):
         self.saving_tensor = saving_tensor
         self.capacity = capacity
