@@ -63,17 +63,14 @@ class make:
         
         for episode in dataset:
             for step in episode:
-                state = step['observations']
-                action = step['actions']
-                reward = step['rewards']
+                observations = step['observations']
+                actions = step['actions']
+                rewards = step['rewards']
+                next_observations = step['next_observations']
                 terminations = step['terminations']
                 truncations = step['truncations']
                 infos = step['infos']
-                if (terminations or truncations) == True:
-                    done = True
-                else:
-                    done = False
                 
-                rm.push(state=state, action=action, reward=reward, done=done, next_state='')
+                rm.push(observations=observations, actions=actions, rewards=rewards, truncations=truncations, next_observations=next_observations)
                 
         return rm
