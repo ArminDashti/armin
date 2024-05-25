@@ -1,7 +1,7 @@
 import random
 import numpy as np
 from collections import namedtuple
-
+import torch
 
 # https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/replay_memory.py
 class reply_memory:
@@ -12,17 +12,24 @@ class reply_memory:
         self.position = 0
 
 
-    def push(self, state, action, reward, next_state, done):
+    def push(self, observations, actions, rewards, next_observations, truncations):
         if len(self.buffer) < self.capacity:
             self.buffer.append(None)
-        self.buffer[self.position] = (state, action, reward, next_state, done)
+        self.buffer[self.position] = (observations, actions, rewards, next_observations, truncations)
         self.position = (self.position + 1) % self.capacity
 
 
-    def sample(self, batch_size):
+    def sample(self, batch_size, tensor=False):
         batch = random.sample(self.buffer, batch_size)
-        state, action, reward, next_state, done = map(np.stack, zip(*batch))
-        return state, action, reward, next_state, done
+        observations, actions, rewards, next_observations, truncations = map(np.stack, zip(*batch))
+        if tensor == False:
+            return {'observations':observations, 'actions':actions, 'rewards':rewards, 'next_observations':next_observations, 'truncations':truncations}
+        else:
+            return {'observations':torch.tensor(observations), 
+                    'actions':torch.tensor(actions), 
+                    'rewards':torch.tensor(rewards), 
+                    'next_observations':torch.tensor(next_observations), 
+                    'truncations':torch.tensor(truncations)}
 
 
     def __len__(self):
