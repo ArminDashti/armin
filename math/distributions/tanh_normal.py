@@ -36,11 +36,12 @@ class tanh_normal(Distribution):
             return torch.tanh(z)
 
 
-    def rsample(self, return_pretanh_value=False):
-        z = (self.normal_mean + self.normal_std * Normal(ptu.zeros(self.normal_mean.size()), ptu.ones(self.normal_std.size())).sample())
+    def rsample(self, return_pre_tanh_value=False):
+        z = self.normal_mean + self.normal_std * Normal(ptu.zeros(self.normal_mean.size()), 
+                                                         ptu.ones(self.normal_std.size())).sample()
         z.requires_grad_()
 
-        if return_pretanh_value:
+        if return_pre_tanh_value:
             return torch.tanh(z), z
         else:
             return torch.tanh(z)
