@@ -5,7 +5,7 @@ from collections import namedtuple
 
 # https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/replay_memory.py
 class reply_memory:
-    def __init__(self, capacity, seed):
+    def __init__(self, capacity, seed=123):
         random.seed(seed)
         self.capacity = capacity
         self.buffer = []
