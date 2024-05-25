@@ -15,21 +15,23 @@ def numpy_to_tensor(tensor, device=None):
 
 
 def zeros(shape, grad=False, device=None):
-    zero_tensor = torch.zeros(*shape)
+    if type(shape) is int:
+        return torch.zeros(shape, requires_grad=grad)
+    zero_tensor = torch.zeros(*shape, requires_grad=grad)
     return zero_tensor
 
 
 def ones(shape, grad=False, device=None):
-    zero_tensor = torch.ones(*shape)
+    zero_tensor = torch.ones(*shape, requires_grad=grad)
     return zero_tensor
 
 
 def rand(shape, dtype='float', grad=False, device=None):
     if dtype == 'int':
-        rand_int = torch.randint(0, 10, shape)
+        rand_int = torch.randint(0, 10, shape, requires_grad=grad)
         return rand_int
     else:
-        rand_float = torch.rand(*shape)
+        rand_float = torch.rand(*shape, requires_grad=grad)
         return rand_float
 
 
