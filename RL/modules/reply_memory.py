@@ -25,11 +25,11 @@ class reply_memory:
         if tensor == False:
             return {'observations':observations, 'actions':actions, 'rewards':rewards, 'next_observations':next_observations, 'truncations':truncations}
         else:
-            return {'observations':torch.tensor(observations), 
-                    'actions':torch.tensor(actions), 
-                    'rewards':torch.tensor(rewards), 
-                    'next_observations':torch.tensor(next_observations), 
-                    'truncations':torch.tensor(truncations)}
+            return {'observations':torch.tensor(observations).float(), 
+                    'actions':torch.tensor(actions).float(), 
+                    'rewards':torch.tensor(rewards).float(), 
+                    'next_observations':torch.tensor(next_observations).float(), 
+                    'truncations':torch.tensor(truncations).float()}
 
 
     def __len__(self):
