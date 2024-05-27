@@ -38,7 +38,6 @@ class MLP(nn.Module):
         in_size = input_size
 
         for i, next_size in enumerate(hidden_sizes):
-            
             fc = nn.Linear(in_size, next_size)
             in_size = next_size
             hidden_init(fc.weight)
@@ -64,6 +63,7 @@ class MLP(nn.Module):
                 h = self.layer_norms[i](h)
             h = self.hidden_activation(h)
         preactivation = self.last_fc(h)
+        print('good', self.last_fc.weight)
         output = self.output_activation(preactivation)
         if return_preactivations:
             return output, preactivation
