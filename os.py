@@ -1,5 +1,7 @@
 import os
 import shutil
+from pathlib import Path
+import inspect
 
 
 def make_dir(new_dir, force=False):
@@ -28,3 +30,10 @@ def remove_dir(rm_dir):
 def copy_dir(source_dir, target_dir):
     pass
 
+
+def current_file_dir():
+    frame = inspect.stack()[1]
+    caller_file = frame.filename
+    current_path = Path(caller_file).resolve()
+    current_dir = current_path.parent
+    return (current_dir, current_path)
