@@ -1,13 +1,14 @@
+# This is for Conda.
+
 numpy
 pandas
 scipy
-# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-torch
+pytorch
 torchvision
-torchaudio
 tensorflow
-opencv-python
+opencv
 pillow
 mujoco
 gymnasium
-
+matplotlib
+pyyaml
