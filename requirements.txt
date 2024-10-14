@@ -12,3 +12,4 @@ mujoco
 gymnasium
 matplotlib
 pyyaml
+spyder
