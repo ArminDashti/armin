@@ -8,8 +8,10 @@ torchvision
 tensorflow
 opencv
 pillow
-mujoco
 gymnasium
 matplotlib
 pyyaml
-spyder
+d3rlpy
+gymnasium_robotics
+
+# gym.register_envs(gymnasium_robotics)
