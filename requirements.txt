@@ -15,5 +15,6 @@ d3rlpy
 gymnasium_robotics
 minari
 minari[gcs]
+transformers
 
 # gym.register_envs(gymnasium_robotics)
