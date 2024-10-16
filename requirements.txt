@@ -1,12 +1,12 @@
-# This is for Conda.
+# This is for pip.
 
 numpy
 pandas
 scipy
-pytorch
+torch
 torchvision
 tensorflow
-opencv
+opencv-python
 pillow
 gymnasium
 matplotlib
