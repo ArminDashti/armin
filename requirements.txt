@@ -13,5 +13,7 @@ matplotlib
 pyyaml
 d3rlpy
 gymnasium_robotics
+minari
+minari[gcs]
 
 # gym.register_envs(gymnasium_robotics)
