@@ -16,5 +16,6 @@ gymnasium_robotics
 minari
 minari[gcs]
 transformers
+seaborn
 
 # gym.register_envs(gymnasium_robotics)
