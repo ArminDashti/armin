@@ -17,5 +17,7 @@ minari
 minari[gcs]
 transformers
 seaborn
+stable-baselines3[extra]
+stable-baselines3
 
 # gym.register_envs(gymnasium_robotics)
