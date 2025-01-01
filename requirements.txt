@@ -19,5 +19,6 @@ transformers
 seaborn
 stable-baselines3[extra]
 stable-baselines3
+tianshou
 
 # gym.register_envs(gymnasium_robotics)
